@@ -245,11 +245,11 @@ public class App extends Application {
       RadioButton radioMat = new RadioButton("Matutino");
       radioMat.setToggleGroup(toggleGroup);
       GridPane.setConstraints(radioMat, 1, 2);
-
+      
       RadioButton radioVes = new RadioButton("Vespertino");
       radioVes.setToggleGroup(toggleGroup);
       GridPane.setConstraints(radioVes, 2, 2);
-
+      
       RadioButton radioNot = new RadioButton("Noturno");
       radioNot.setToggleGroup(toggleGroup);
       GridPane.setConstraints(radioNot, 3, 2);
