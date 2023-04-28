@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -155,10 +156,9 @@ public class App extends Application {
       GridPane.setConstraints(ufLabel, 2, 4);
 
       ChoiceBox choiceuf = new ChoiceBox<>();
-      choiceuf.getItems().addAll("SP", "MG", "BA");
-      choiceuf.setValue("SP");
-      //   choiceBox.getItems().add("MG");
-      //   choiceBox.getItems().add("BA");
+      choiceuf.getItems().add(0, "SP");
+      choiceuf.getItems().add(1, "BA");
+      choiceuf.getItems().add(2, "MG");
 
       HBox ufField = new HBox(choiceuf);
 
@@ -214,20 +214,22 @@ public class App extends Application {
       GridPane.setConstraints(cursoLabel, 0, 0);
 
       ChoiceBox choicecurse = new ChoiceBox<>();
-      choicecurse.setMinWidth(600);
-      choicecurse.getItems().addAll("Desenvolviment", "Análise", "Ciência");
+      // choicecurse.setPrefWidth(600);
+      choicecurse.getItems().addAll("Desenvolvimento", "Análise", "Ciência");
       choicecurse.setValue("Ciência");
+      choicecurse.setPrefWidth(300);
 
       HBox curseField = new HBox(choicecurse);
       GridPane.setConstraints(curseField, 1, 0);
       //   Curso
 
       //   Campus
-      Label campusLabel = new Label("campus :");
+      Label campusLabel = new Label("Campus :");
       GridPane.setConstraints(campusLabel, 0, 1);
 
       ChoiceBox choicecampus = new ChoiceBox<>();
-      choicecampus.setMinWidth(600);
+      choicecampus.setPrefWidth(300);
+      // choicecampus.setMaxWidth(400);
       choicecampus.getItems().addAll("UNICID", "UNIP", "Anhanguera");
       choicecampus.setValue("UNICID");
 
@@ -244,30 +246,97 @@ public class App extends Application {
 
       RadioButton radioMat = new RadioButton("Matutino");
       radioMat.setToggleGroup(toggleGroup);
-      GridPane.setConstraints(radioMat, 1, 2);
-      
+      // radioMat.setPadding(new Insets(0, 20, 0, 0));
+      GridPane.setHgrow(radioMat, null);
+
       RadioButton radioVes = new RadioButton("Vespertino");
       radioVes.setToggleGroup(toggleGroup);
-      GridPane.setConstraints(radioVes, 2, 2);
-      
+      // radioVes.setPadding(new Insets(0, 20, 0, 0));
+
       RadioButton radioNot = new RadioButton("Noturno");
       radioNot.setToggleGroup(toggleGroup);
-      GridPane.setConstraints(radioNot, 3, 2);
+      // radioNot.setPadding(new Insets(0, 20, 0, 0));
       radioNot.setSelected(true);
       //   Período
 
+      HBox boxradiobt = new HBox(radioMat, radioVes, radioNot);
+      boxradiobt.setSpacing(10);
+      GridPane.setConstraints(boxradiobt, 1, 2);
+
       //   Lista de Botões com icones
-      Image turnoffimg = new Image("./assets/image.png");
-      ImageView turnoffImageView = new ImageView(turnoffimg);
-      turnoffImageView.setFitWidth(60);
-      turnoffImageView.setFitHeight(55);
-      Button turnoff = new Button("turnoff");
-      turnoff.setGraphic(turnoffImageView);
-      turnoff.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-      turnoff.setTooltip(new Tooltip("Desliga a operação"));
-      turnoff.setOnAction(e -> System.out.println("Desligou"));
-      GridPane.setConstraints(turnoff, 0, 3);
+      //? BTN1
+      Image imgbt1 = new Image("./assets/image.png");
+
+      ImageView btnimgview = new ImageView(imgbt1);
+      btnimgview.setFitWidth(60);
+      btnimgview.setFitHeight(55);
+
+      Button btn1 = new Button("btn1");
+      btn1.setGraphic(btnimgview);
+      btn1.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn1.setTooltip(new Tooltip("Desliga a operação"));
+      btn1.setOnAction(e -> System.out.println("btn1"));
+      // GridPane.setConstraints(btn1, 0, 3);
+      //? BTN1
+      //? BTN2
+      Image imgbt2 = new Image("./assets/image.png");
+
+      ImageView btn2imgview = new ImageView(imgbt2);
+      btn2imgview.setFitWidth(60);
+      btn2imgview.setFitHeight(55);
+
+      Button btn2 = new Button("btn2");
+      btn2.setGraphic(btn2imgview);
+      btn2.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn2.setTooltip(new Tooltip("Desliga a operação"));
+      btn2.setOnAction(e -> System.out.println("btn2"));
+      // GridPane.setConstraints(btn2, 1, 3);
+      //? BTN2
+      //? BTN3
+      Image imgbt3 = new Image("./assets/image.png");
+      ImageView btn3imgview = new ImageView(imgbt3);
+      btn3imgview.setFitWidth(60);
+      btn3imgview.setFitHeight(55);
+      Button btn3 = new Button("btn3");
+      btn3.setGraphic(btn3imgview);
+      btn3.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn3.setTooltip(new Tooltip("Desliga a operação"));
+      btn3.setOnAction(e -> System.out.println("btn3"));
+      // GridPane.setConstraints(btn3, 2, 3);
+      //? BTN3
+      //? BTN4
+      Image imgbt4 = new Image("./assets/image.png");
+
+      ImageView btn4imgview = new ImageView(imgbt4);
+      btn4imgview.setFitWidth(60);
+      btn4imgview.setFitHeight(55);
+
+      Button btn4 = new Button("btn4");
+      btn4.setGraphic(btn4imgview);
+      btn4.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn4.setTooltip(new Tooltip("Desliga a operação"));
+      btn4.setOnAction(e -> System.out.println("btn4"));
+      // GridPane.setConstraints(btn4, 3, 3);
+      //? BTN4
+      //? BTN5
+      Image imgbt5 = new Image("./assets/image.png");
+
+      ImageView btn5imgview = new ImageView(imgbt5);
+      btn5imgview.setFitWidth(60);
+      btn5imgview.setFitHeight(55);
+
+      Button btn5 = new Button("btn5");
+      btn5.setGraphic(btn5imgview);
+      btn5.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn5.setTooltip(new Tooltip("Desliga a operação"));
+      btn5.setOnAction(e -> System.out.println("btn5"));
+      // GridPane.setConstraints(btn4, 3, 3);
+      //? BTN5
       //   Lista de Botões com icones
+
+      HBox boxbtn = new HBox(btn1, btn2, btn3, btn4, btn5);
+      boxbtn.setSpacing(10);
+      GridPane.setConstraints(boxbtn, 0, 3, 2, 1);
 
       gridPane2
         .getChildren()
@@ -277,15 +346,184 @@ public class App extends Application {
           campusLabel,
           campusField,
           periodLabel,
-          radioMat,
-          radioVes,
-          radioNot,
-          turnoff
+          // radioMat,
+          // radioVes,
+          // radioNot,
+          boxradiobt,
+          // btn1,
+          // btn2,
+          // btn3,
+          // btn4,
+          boxbtn
         );
       tab2.setContent(gridPane2);
 
       Tab tab3 = new Tab("Notas e Faltas");
       tab3.setClosable(false);
+
+      GridPane gridPane3 = new GridPane();
+      gridPane3.setPadding(new Insets(16, 16, 16, 16));
+      gridPane3.setVgap(4);
+      gridPane3.setHgap(8);
+
+      //   RGM
+      Label rgmLabel2 = new Label("RGM: ");
+      GridPane.setConstraints(rgmLabel2, 0, 0);
+
+      TextField rgmField2 = new TextField("1234567");
+      GridPane.setConstraints(rgmField2, 1, 0);
+      //   RGM
+
+      //   Nome
+      TextField nameField2 = new TextField("Vinicius Silva de Jesus");
+      GridPane.setConstraints(nameField2, 2, 0, 4, 1);
+      //   Nome
+
+      // Curso
+      TextField courseField2 = new TextField("Ciência da Computação");
+      GridPane.setConstraints(courseField2, 0, 1, 6, 1);
+      // Curso
+
+      // Disciplina
+      Label labeldiscipline = new Label("Disciplina: ");
+      GridPane.setConstraints(labeldiscipline, 0, 2);
+
+      ChoiceBox choicediscipline = new ChoiceBox<>();
+      // choicediscipline.setPrefWidth(315);
+      // choicediscipline.setMaxWidth(400);
+      choicediscipline
+        .getItems()
+        .addAll(
+          "Estrutura de Dados",
+          "Programação Orientada à Objetos",
+          "Programação WEB"
+        );
+      choicediscipline.setValue("Estrutura de Dados");
+
+      HBox disciplineField = new HBox(choicediscipline);
+      GridPane.setConstraints(disciplineField, 1, 2, 5, 1);
+      // Disciplina
+
+      // Semestre Nota Faltas
+      Label semesterlabel = new Label("Semestre: ");
+      // GridPane.setConstraints(semestrelabel, 0, 3);
+
+      ChoiceBox choicesem = new ChoiceBox<>();
+      // choicediscipline.setPrefWidth(315);
+      // choicesem.setMaxWidth(400);
+      choicesem
+        .getItems()
+        .addAll("1º Sem", "2º Sem", "3º Sem", "4º Sem", "5º Sem", "6º Sem");
+      choicesem.setValue("1º Sem");
+
+      Label notelabel = new Label("Nota: ");
+      TextField noteField = new TextField("10");
+
+      Label faultlabel = new Label("Faltas: ");
+      TextField faultField = new TextField("10");
+
+      HBox semnotfaltbox = new HBox(
+        semesterlabel,
+        choicesem,
+        notelabel,
+        noteField,
+        faultlabel,
+        faultField
+      );
+      semnotfaltbox.setSpacing(10);
+      GridPane.setConstraints(semnotfaltbox, 0, 3, 5, 1);
+
+      // Semestre Nota Faltas
+
+      //   Lista de Botões com icones
+      //? BTN12
+      Image imgbt12 = new Image("./assets/image.png");
+
+      ImageView btnimgview2 = new ImageView(imgbt12);
+      btnimgview2.setFitWidth(60);
+      btnimgview2.setFitHeight(55);
+
+      Button btn12 = new Button("btn12");
+      btn12.setGraphic(btnimgview2);
+      btn12.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn12.setTooltip(new Tooltip("Desliga a operação"));
+      btn12.setOnAction(e -> System.out.println("btn12"));
+      // GridPane.setConstraints(btn12, 0, 3);
+      //? BTN12
+      //? BTN22
+      Image imgbt22 = new Image("./assets/image.png");
+
+      ImageView btn2imgview2 = new ImageView(imgbt22);
+      btn2imgview2.setFitWidth(60);
+      btn2imgview2.setFitHeight(55);
+
+      Button btn22 = new Button("btn22");
+      btn22.setGraphic(btn2imgview2);
+      btn22.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn22.setTooltip(new Tooltip("Desliga a operação"));
+      btn22.setOnAction(e -> System.out.println("btn22"));
+      // GridPane.setConstraints(btn22, 1, 3);
+      //? BTN22
+      //? BTN32
+      Image imgbt32 = new Image("./assets/image.png");
+      ImageView btn3imgview2 = new ImageView(imgbt32);
+      btn3imgview2.setFitWidth(60);
+      btn3imgview2.setFitHeight(55);
+      Button btn32 = new Button("btn32");
+      btn32.setGraphic(btn3imgview2);
+      btn32.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn32.setTooltip(new Tooltip("Desliga a operação"));
+      btn32.setOnAction(e -> System.out.println("btn32"));
+      // GridPane.setConstraints(btn32, 2, 3);
+      //? BTN32
+      //? BTN42
+      Image imgbt42 = new Image("./assets/image.png");
+
+      ImageView btn4imgview2 = new ImageView(imgbt42);
+      btn4imgview2.setFitWidth(60);
+      btn4imgview2.setFitHeight(55);
+
+      Button btn42 = new Button("btn42");
+      btn42.setGraphic(btn4imgview2);
+      btn42.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn42.setTooltip(new Tooltip("Desliga a operação"));
+      btn42.setOnAction(e -> System.out.println("btn42"));
+      // GridPane.setConstraints(btn42, 3, 3);
+      //? BTN42
+      //? BTN52
+      Image imgbt52 = new Image("./assets/image.png");
+
+      ImageView btn5imgview2 = new ImageView(imgbt52);
+      btn5imgview2.setFitWidth(60);
+      btn5imgview2.setFitHeight(55);
+
+      Button btn52 = new Button("btn52");
+      btn52.setGraphic(btn5imgview2);
+      btn52.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+      btn52.setTooltip(new Tooltip("Desliga a operação"));
+      btn52.setOnAction(e -> System.out.println("btn52"));
+      // GridPane.setConstraints(btn4, 3, 3);
+      //? BTN52
+      //   Lista de Botões com icones
+
+      HBox boxbtn2 = new HBox(btn12, btn22, btn32, btn42, btn52);
+      boxbtn2.setSpacing(20);
+      GridPane.setConstraints(boxbtn2, 0, 4, 4, 1);
+
+      gridPane3
+        .getChildren()
+        .addAll(
+          rgmLabel2,
+          rgmField2,
+          nameField2,
+          courseField2,
+          labeldiscipline,
+          disciplineField,
+          semnotfaltbox,
+          boxbtn2
+        );
+
+      tab3.setContent(gridPane3);
 
       Tab tab4 = new Tab("Boletim");
       tab4.setClosable(false);
