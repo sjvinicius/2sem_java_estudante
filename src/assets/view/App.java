@@ -1,7 +1,6 @@
 package assets.view;
 
 import assets.sharing.Connectionfactory;
-
 import java.sql.Connection;
 import java.util.zip.CheckedOutputStream;
 import javafx.application.Application;
@@ -9,11 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -22,6 +25,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -34,13 +40,12 @@ import javafx.stage.Window;
 public class App extends Application {
 
   Stage window;
-  
+
   TabPane tabPane;
 
   Connectionfactory conexao;
 
   public static void main(String[] args) throws Exception {
-
     launch(args);
   }
 
@@ -91,6 +96,22 @@ public class App extends Application {
 
       // window.setScene(scene1);
       window.setTitle("Estudantes");
+
+      Menu teste = new Menu("menu1");
+      MenuItem menuItem1 = new MenuItem("Item 1");
+      KeyCombination shortsave = new KeyCodeCombination(
+        KeyCode.S,
+        KeyCombination.CONTROL_DOWN
+      );
+      menuItem1.setAccelerator(shortsave);
+      MenuItem menuItem2 = new MenuItem("Item 2");
+
+      teste.getItems().add(menuItem1);
+      teste.getItems().add(menuItem2);
+
+      MenuBar menuBar = new MenuBar();
+      menuBar.getMenus().add(teste);
+
       // window.show();
       BorderPane borderPane = new BorderPane();
 
@@ -542,8 +563,14 @@ public class App extends Application {
       tabPane.getTabs().addAll(tab1, tab2, tab3, tab4);
 
       borderPane.setCenter(tabPane);
+      borderPane.setLayoutY(25);
+      Group group = new Group();
+      // group.getChildren().addAll(menuBar,borderPane);
+      group.getChildren().add(menuBar);
+      group.getChildren().add(borderPane);
 
-      Scene root = new Scene(borderPane, 750, 250);
+      // Scene root = new Scene(borderPane, 750, 250);
+      Scene root = new Scene(group, 750, 250);
 
       window.setScene(root);
       window.show();
