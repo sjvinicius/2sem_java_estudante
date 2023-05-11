@@ -1,7 +1,9 @@
 package assets.view;
-import assets.sharing.Connectionfactory;
-import java.util.zip.CheckedOutputStream;
 
+import assets.sharing.Connectionfactory;
+
+import java.sql.Connection;
+import java.util.zip.CheckedOutputStream;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,13 +34,14 @@ import javafx.stage.Window;
 public class App extends Application {
 
   Stage window;
-  // Scene scene1, scene2;
+  
   TabPane tabPane;
 
+  Connectionfactory conexao;
+
   public static void main(String[] args) throws Exception {
+
     launch(args);
-    Connectionfactory conexao = new Connectionfactory();
-    conexao.Connectionfactory();
   }
 
   @Override
@@ -58,6 +61,7 @@ public class App extends Application {
       // primaryStage.setScene(new Scene(root, 250, 300));
       // primaryStage.show();
 
+      this.conexao = new Connectionfactory();
       window = primaryStage;
 
       // Label label = new Label("Bem-vindo à primeira Scene");
@@ -220,7 +224,9 @@ public class App extends Application {
 
       ChoiceBox choicecurse = new ChoiceBox<>();
       // choicecurse.setPrefWidth(600);
-      choicecurse.getItems().addAll("Desenvolvimento", "Análise de dessenvolvimento", "Ciência");
+      choicecurse
+        .getItems()
+        .addAll("Desenvolvimento", "Análise de dessenvolvimento", "Ciência");
       choicecurse.setValue("Ciência");
       choicecurse.setPrefWidth(300);
 
