@@ -14,7 +14,8 @@ public class Connectionfactory {
   public Connectionfactory() {
     try {
       String url =
-        "jdbc:mysql://localhost:3306/estudante_2sem_cc?user=root&password=12345"; //ainda falta nome do banco user e password;
+        // "jdbc:mysql://localhost:3306/estudante_2sem_cc?user=root&password="; // Giovanni Connection
+        "jdbc:mysql://localhost:3306/estudante_2sem_cc?user=root&password=12345"; // Vinicius Conection
       this.conn = DriverManager.getConnection(url);
 
       System.out.println("Banco de Dados: OK");
@@ -31,7 +32,11 @@ public class Connectionfactory {
       Statement stmt = this.conn.createStatement();
       ResultSet rs = stmt.executeQuery(query);
     ) {
-      
+
+      while(rs.next()){
+
+        System.out.println(rs.getString("EMAIL"));
+      }
     } catch (SQLException erro) {
       JOptionPane.showMessageDialog(null, erro.getMessage());
     }

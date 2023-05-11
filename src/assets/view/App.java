@@ -42,10 +42,11 @@ public class App extends Application {
   Stage window;
 
   TabPane tabPane;
-
   Connectionfactory conexao;
 
   public static void main(String[] args) throws Exception {
+    Connectionfactory con = new Connectionfactory();
+    con.SendQuery("SELECT * FROM aluno");
     launch(args);
   }
 
@@ -97,20 +98,53 @@ public class App extends Application {
       // window.setScene(scene1);
       window.setTitle("Estudantes");
 
-      Menu teste = new Menu("menu1");
-      MenuItem menuItem1 = new MenuItem("Item 1");
+      Menu menu1 = new Menu("Aluno");
+      MenuItem menuItem1 = new MenuItem("Salvar");
+      MenuItem menuItem2 = new MenuItem("Alterar");
+      MenuItem menuItem3 = new MenuItem("Consultar");
+      MenuItem menuItem4 = new MenuItem("Excluir");
       KeyCombination shortsave = new KeyCodeCombination(
         KeyCode.S,
         KeyCombination.CONTROL_DOWN
-      );
-      menuItem1.setAccelerator(shortsave);
-      MenuItem menuItem2 = new MenuItem("Item 2");
+        );
+        menuItem1.setAccelerator(shortsave);
+        //? ----------------------------------------------
+        MenuItem menuItem5 = new MenuItem("Sair");
+        KeyCombination shortexit = new KeyCodeCombination(
+          KeyCode.R,
+          KeyCombination.SHIFT_DOWN
+          );
+          menuItem5.setAccelerator(shortexit);
+        // MenuItem menuItem2 = new MenuItem("Notas e Faltas");
+      // MenuItem menuItem3 = new MenuItem("Ajuda");
 
-      teste.getItems().add(menuItem1);
-      teste.getItems().add(menuItem2);
+      menu1.getItems().addAll(menuItem1,menuItem2,menuItem3,menuItem4,menuItem5);
+
+      Menu menu2 = new Menu("Notas e Faltas");
+      MenuItem menu2Item1 = new MenuItem("Salvar");
+      MenuItem menu2Item2 = new MenuItem("Alterar");
+      KeyCombination shortalt = new KeyCodeCombination(
+          KeyCode.A,
+          KeyCombination.CONTROL_DOWN
+          );
+          menu2Item2.setAccelerator(shortexit);
+      MenuItem menu2Item3 = new MenuItem("Excluir");
+      MenuItem menu2Item4 = new MenuItem("Consultar");
+
+      menu2.getItems().addAll(menu2Item1,menu2Item2,menu2Item3,menu2Item4);
+      
+      Menu menu3 = new Menu("Notas e Faltas");
+      MenuItem menu3Item1 = new MenuItem("Sobre");
+      KeyCombination shorthelp = new KeyCodeCombination(
+          KeyCode.F9,
+          KeyCombination.ALT_ANY
+          );
+          menu3Item1.setAccelerator(shorthelp);
+      
+      menu3.getItems().addAll(menu3Item1);
 
       MenuBar menuBar = new MenuBar();
-      menuBar.getMenus().add(teste);
+      menuBar.getMenus().addAll(menu1, menu2, menu3);
 
       // window.show();
       BorderPane borderPane = new BorderPane();
