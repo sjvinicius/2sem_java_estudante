@@ -1,5 +1,5 @@
 package assets.view;
-
+import assets.sharing.Connectionfactory;
 import java.util.zip.CheckedOutputStream;
 
 import javafx.application.Application;
@@ -37,7 +37,12 @@ public class App extends Application {
 
   public static void main(String[] args) throws Exception {
     launch(args);
+<<<<<<< HEAD
 
+=======
+    Connectionfactory conexao = new Connectionfactory();
+    conexao.Connectionfactory();
+>>>>>>> 6a1c9c2a18b21c18222da28096d0912a36838ee6
   }
 
   @Override
@@ -219,7 +224,7 @@ public class App extends Application {
 
       ChoiceBox choicecurse = new ChoiceBox<>();
       // choicecurse.setPrefWidth(600);
-      choicecurse.getItems().addAll("Desenvolvimento", "Análise", "Ciência");
+      choicecurse.getItems().addAll("Desenvolvimento", "Análise de dessenvolvimento", "Ciência");
       choicecurse.setValue("Ciência");
       choicecurse.setPrefWidth(300);
 
