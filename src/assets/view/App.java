@@ -42,11 +42,12 @@ public class App extends Application {
   Stage window;
 
   TabPane tabPane;
-  Connectionfactory conexao;
+
+  // Connectionfactory conexao;
 
   public static void main(String[] args) throws Exception {
-    Connectionfactory con = new Connectionfactory();
-    con.SendQuery("SELECT * FROM aluno");
+    // Connectionfactory con = new Connectionfactory();
+    // con.SendQuery("SELECT * FROM aluno");
     launch(args);
   }
 
@@ -67,7 +68,6 @@ public class App extends Application {
       // primaryStage.setScene(new Scene(root, 250, 300));
       // primaryStage.show();
 
-      this.conexao = new Connectionfactory();
       window = primaryStage;
 
       // Label label = new Label("Bem-vindo à primeira Scene");
@@ -106,41 +106,48 @@ public class App extends Application {
       KeyCombination shortsave = new KeyCodeCombination(
         KeyCode.S,
         KeyCombination.CONTROL_DOWN
-        );
-        menuItem1.setAccelerator(shortsave);
-        //? ----------------------------------------------
-        MenuItem menuItem5 = new MenuItem("Sair");
-        KeyCombination shortexit = new KeyCodeCombination(
-          KeyCode.R,
-          KeyCombination.SHIFT_DOWN
-          );
-          menuItem5.setAccelerator(shortexit);
-        // MenuItem menuItem2 = new MenuItem("Notas e Faltas");
+      );
+      menuItem1.setAccelerator(shortsave);
+      //? ----------------------------------------------
+      MenuItem menuItem5 = new MenuItem("Sair");
+      menuItem5.setOnAction(e -> {
+        System.exit(0);
+      });
+      KeyCombination shortexit = new KeyCodeCombination(
+        KeyCode.R,
+        KeyCombination.SHORTCUT_DOWN
+      );
+      menuItem5.setAccelerator(shortexit);
+      
+      
+      // MenuItem menuItem2 = new MenuItem("Notas e Faltas");
       // MenuItem menuItem3 = new MenuItem("Ajuda");
 
-      menu1.getItems().addAll(menuItem1,menuItem2,menuItem3,menuItem4,menuItem5);
+      menu1
+        .getItems()
+        .addAll(menuItem1, menuItem2, menuItem3, menuItem4, menuItem5);
 
       Menu menu2 = new Menu("Notas e Faltas");
       MenuItem menu2Item1 = new MenuItem("Salvar");
       MenuItem menu2Item2 = new MenuItem("Alterar");
       KeyCombination shortalt = new KeyCodeCombination(
-          KeyCode.A,
-          KeyCombination.CONTROL_DOWN
-          );
-          menu2Item2.setAccelerator(shortexit);
+        KeyCode.A,
+        KeyCombination.CONTROL_DOWN
+      );
+      menu2Item2.setAccelerator(shortexit);
       MenuItem menu2Item3 = new MenuItem("Excluir");
       MenuItem menu2Item4 = new MenuItem("Consultar");
 
-      menu2.getItems().addAll(menu2Item1,menu2Item2,menu2Item3,menu2Item4);
-      
-      Menu menu3 = new Menu("Notas e Faltas");
+      menu2.getItems().addAll(menu2Item1, menu2Item2, menu2Item3, menu2Item4);
+
+      Menu menu3 = new Menu("Ajuda");
       MenuItem menu3Item1 = new MenuItem("Sobre");
       KeyCombination shorthelp = new KeyCodeCombination(
-          KeyCode.F9,
-          KeyCombination.ALT_ANY
-          );
-          menu3Item1.setAccelerator(shorthelp);
-      
+        KeyCode.F9,
+        KeyCombination.ALT_ANY
+      );
+      menu3Item1.setAccelerator(shorthelp);
+
       menu3.getItems().addAll(menu3Item1);
 
       MenuBar menuBar = new MenuBar();
@@ -223,6 +230,8 @@ public class App extends Application {
       choiceuf.getItems().add(0, "SP");
       choiceuf.getItems().add(1, "BA");
       choiceuf.getItems().add(2, "MG");
+
+      choiceuf.setValue("SP");
 
       HBox ufField = new HBox(choiceuf);
 
@@ -604,8 +613,9 @@ public class App extends Application {
       group.getChildren().add(borderPane);
 
       // Scene root = new Scene(borderPane, 750, 250);
-      Scene root = new Scene(group, 750, 250);
+      Scene root = new Scene(group, 750, 255);
 
+      // root.
       window.setScene(root);
       window.show();
     } catch (Error e) {
