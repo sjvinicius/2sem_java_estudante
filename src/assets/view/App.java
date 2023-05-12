@@ -28,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -115,11 +116,10 @@ public class App extends Application {
       });
       KeyCombination shortexit = new KeyCodeCombination(
         KeyCode.R,
-        KeyCombination.SHORTCUT_DOWN
+        KeyCombination.SHIFT_DOWN
       );
       menuItem5.setAccelerator(shortexit);
-      
-      
+
       // MenuItem menuItem2 = new MenuItem("Notas e Faltas");
       // MenuItem menuItem3 = new MenuItem("Ajuda");
 
@@ -134,7 +134,7 @@ public class App extends Application {
         KeyCode.A,
         KeyCombination.CONTROL_DOWN
       );
-      menu2Item2.setAccelerator(shortexit);
+      menu2Item2.setAccelerator(shortalt);
       MenuItem menu2Item3 = new MenuItem("Excluir");
       MenuItem menu2Item4 = new MenuItem("Consultar");
 
@@ -615,7 +615,22 @@ public class App extends Application {
       // Scene root = new Scene(borderPane, 750, 250);
       Scene root = new Scene(group, 750, 255);
 
-      // root.
+      root.setOnKeyPressed(
+        new EventHandler<KeyEvent>() {
+          @Override
+          public void handle(KeyEvent evt) {
+            if (evt.getCode() == KeyCode.S && evt.isControlDown()) {
+              System.out.println("Salvar");
+            } else if (evt.getCode() == KeyCode.A && evt.isControlDown()) {
+              System.out.println("Alterar");
+            } else if (evt.getCode() == KeyCode.R && evt.isShiftDown()) {
+              System.exit(0);
+            } else if (evt.getCode() == KeyCode.F9) {
+              System.out.println("Ajuda");
+            }
+          }
+        }
+      );
       window.setScene(root);
       window.show();
     } catch (Error e) {
