@@ -1,5 +1,7 @@
 package assets.view;
 
+import assets.controller.EstudanteController;
+import assets.model.Estudante;
 import assets.sharing.Connectionfactory;
 import java.sql.Connection;
 import java.util.zip.CheckedOutputStream;
@@ -98,60 +100,6 @@ public class App extends Application {
 
       // window.setScene(scene1);
       window.setTitle("Estudantes");
-
-      Menu menu1 = new Menu("Aluno");
-      MenuItem menuItem1 = new MenuItem("Salvar");
-      MenuItem menuItem2 = new MenuItem("Alterar");
-      MenuItem menuItem3 = new MenuItem("Consultar");
-      MenuItem menuItem4 = new MenuItem("Excluir");
-      KeyCombination shortsave = new KeyCodeCombination(
-        KeyCode.S,
-        KeyCombination.CONTROL_DOWN
-      );
-      menuItem1.setAccelerator(shortsave);
-      //? ----------------------------------------------
-      MenuItem menuItem5 = new MenuItem("Sair");
-      menuItem5.setOnAction(e -> {
-        System.exit(0);
-      });
-      KeyCombination shortexit = new KeyCodeCombination(
-        KeyCode.R,
-        KeyCombination.SHIFT_DOWN
-      );
-      menuItem5.setAccelerator(shortexit);
-
-      // MenuItem menuItem2 = new MenuItem("Notas e Faltas");
-      // MenuItem menuItem3 = new MenuItem("Ajuda");
-
-      menu1
-        .getItems()
-        .addAll(menuItem1, menuItem2, menuItem3, menuItem4, menuItem5);
-
-      Menu menu2 = new Menu("Notas e Faltas");
-      MenuItem menu2Item1 = new MenuItem("Salvar");
-      MenuItem menu2Item2 = new MenuItem("Alterar");
-      KeyCombination shortalt = new KeyCodeCombination(
-        KeyCode.A,
-        KeyCombination.CONTROL_DOWN
-      );
-      menu2Item2.setAccelerator(shortalt);
-      MenuItem menu2Item3 = new MenuItem("Excluir");
-      MenuItem menu2Item4 = new MenuItem("Consultar");
-
-      menu2.getItems().addAll(menu2Item1, menu2Item2, menu2Item3, menu2Item4);
-
-      Menu menu3 = new Menu("Ajuda");
-      MenuItem menu3Item1 = new MenuItem("Sobre");
-      KeyCombination shorthelp = new KeyCodeCombination(
-        KeyCode.F9,
-        KeyCombination.ALT_ANY
-      );
-      menu3Item1.setAccelerator(shorthelp);
-
-      menu3.getItems().addAll(menu3Item1);
-
-      MenuBar menuBar = new MenuBar();
-      menuBar.getMenus().addAll(menu1, menu2, menu3);
 
       // window.show();
       BorderPane borderPane = new BorderPane();
@@ -607,20 +555,138 @@ public class App extends Application {
 
       borderPane.setCenter(tabPane);
       borderPane.setLayoutY(25);
+      
       Group group = new Group();
       // group.getChildren().addAll(menuBar,borderPane);
-      group.getChildren().add(menuBar);
-      group.getChildren().add(borderPane);
-
       // Scene root = new Scene(borderPane, 750, 250);
       Scene root = new Scene(group, 750, 255);
 
+      Menu menu1 = new Menu("Aluno");
+      MenuItem menuItem1 = new MenuItem("Salvar");
+      menuItem1.setOnAction(e -> {
+        System.out.println("Salvar");
+        System.out.println(rgmField.getText());
+
+        // EstudanteController estCtlr = new EstudanteController();
+        // Estudante est = new Estudante(
+        //   rgmField.getText().toString(),
+        //   nameField.getText().toString(),
+        //   dtnascField.getText().toString(),
+        //   cpfField.getText().toString(),
+        //   emailField.getText().toString(),
+        //   endField.getText().toString(),
+        //   munField.getText().toString(),
+        //   ufLabel.getText().toString(),
+        //   phoneField.getText().toString()
+        // );
+
+        EstudanteController estctrl = new EstudanteController();
+
+        // estctrl.CreateEstudante(est);
+
+        estctrl.CreateEstudante(
+          rgmField.getText().toString(),
+          nameField.getText().toString(),
+          dtnascField.getText().toString(),
+          cpfField.getText().toString(),
+          emailField.getText().toString(),
+          endField.getText().toString(),
+          munField.getText().toString(),
+          ufLabel.getText().toString(),
+          phoneField.getText().toString()
+        );
+      });
+      MenuItem menuItem2 = new MenuItem("Alterar");
+      MenuItem menuItem3 = new MenuItem("Consultar");
+      MenuItem menuItem4 = new MenuItem("Excluir");
+      KeyCombination shortsave = new KeyCodeCombination(
+        KeyCode.S,
+        KeyCombination.CONTROL_DOWN
+      );
+      menuItem1.setAccelerator(shortsave);
+      //? ----------------------------------------------
+      MenuItem menuItem5 = new MenuItem("Sair");
+      menuItem5.setOnAction(e -> {
+        System.exit(0);
+      });
+      KeyCombination shortexit = new KeyCodeCombination(
+        KeyCode.R,
+        KeyCombination.SHIFT_DOWN
+      );
+      menuItem5.setAccelerator(shortexit);
+
+      // MenuItem menuItem2 = new MenuItem("Notas e Faltas");
+      // MenuItem menuItem3 = new MenuItem("Ajuda");
+
+      menu1
+        .getItems()
+        .addAll(menuItem1, menuItem2, menuItem3, menuItem4, menuItem5);
+
+      Menu menu2 = new Menu("Notas e Faltas");
+      MenuItem menu2Item1 = new MenuItem("Salvar");
+      MenuItem menu2Item2 = new MenuItem("Alterar");
+      KeyCombination shortalt = new KeyCodeCombination(
+        KeyCode.A,
+        KeyCombination.CONTROL_DOWN
+      );
+      menu2Item2.setAccelerator(shortalt);
+      MenuItem menu2Item3 = new MenuItem("Excluir");
+      MenuItem menu2Item4 = new MenuItem("Consultar");
+
+      menu2.getItems().addAll(menu2Item1, menu2Item2, menu2Item3, menu2Item4);
+
+      Menu menu3 = new Menu("Ajuda");
+      MenuItem menu3Item1 = new MenuItem("Sobre");
+      KeyCombination shorthelp = new KeyCodeCombination(
+        KeyCode.F9,
+        KeyCombination.ALT_ANY
+      );
+      menu3Item1.setAccelerator(shorthelp);
+
+      menu3.getItems().addAll(menu3Item1);
+
+      MenuBar menuBar = new MenuBar();
+      menuBar.getMenus().addAll(menu1, menu2, menu3);
+
+      group.getChildren().add(menuBar);
+      group.getChildren().add(borderPane);
+      
       root.setOnKeyPressed(
         new EventHandler<KeyEvent>() {
           @Override
           public void handle(KeyEvent evt) {
             if (evt.getCode() == KeyCode.S && evt.isControlDown()) {
               System.out.println("Salvar");
+              System.out.println(rgmField.getText());
+
+              // EstudanteController estCtlr = new EstudanteController();
+              // Estudante est = new Estudante(
+              //   rgmField.getText().toString(),
+              //   nameField.getText().toString(),
+              //   dtnascField.getText().toString(),
+              //   cpfField.getText().toString(),
+              //   emailField.getText().toString(),
+              //   endField.getText().toString(),
+              //   munField.getText().toString(),
+              //   ufLabel.getText().toString(),
+              //   phoneField.getText().toString()
+              // );
+
+              EstudanteController estctrl = new EstudanteController();
+
+              // estctrl.CreateEstudante(est);
+
+              estctrl.CreateEstudante(
+                rgmField.getText().toString(),
+                nameField.getText().toString(),
+                dtnascField.getText().toString(),
+                cpfField.getText().toString(),
+                emailField.getText().toString(),
+                endField.getText().toString(),
+                munField.getText().toString(),
+                ufLabel.getText().toString(),
+                phoneField.getText().toString()
+              );
             } else if (evt.getCode() == KeyCode.A && evt.isControlDown()) {
               System.out.println("Alterar");
             } else if (evt.getCode() == KeyCode.R && evt.isShiftDown()) {
