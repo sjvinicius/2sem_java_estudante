@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.util.zip.CheckedOutputStream;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,6 +30,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -42,6 +45,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
 public class App extends Application {
@@ -561,11 +568,60 @@ public class App extends Application {
 
       Tab tab4 = new Tab("Boletim");
       tab4.setClosable(false);
-      tab4.setOnSelectionChanged(e -> {
+      // tab4.setOnSelectionChanged(e -> {
+      //  table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
+      // });
 
-        
+      GridPane gridPane4 = new GridPane();
+      gridPane4.setPadding(new Insets(16, 16, 16, 16));
+      gridPane4.setVgap(4);
+      gridPane4.setHgap(8);
+
+      TableView table = new TableView();
+      table.setEditable(true);
+
+      TableColumn nome = new TableColumn("Nome");
+      TableColumn curso = new TableColumn("Curso");
+      TableColumn disciplina = new TableColumn("Disciplina");
+      TableColumn sem = new TableColumn("Semestre");
+      TableColumn falt = new TableColumn("Falta");
+      TableColumn not = new TableColumn("Nota");
+
+      nome.setCellValueFactory(new PropertyValueFactory<>("teste"));
+
+      // ObservableList<Boletim> listaAlunos = FXCollections.observableArrayList(
+      //   ["João", "Ciencia", "Matemática", "1º semestre", "2", "8"]
+      // );
+      // table.setItems(Boletim);
+
+      tab4.setOnSelectionChanged(e -> {
+        // chamar a função para gerar o boletim
 
       });
+
+      table.getColumns().addAll(nome, curso, disciplina, sem, falt, not);
+
+      HBox boxtable = new HBox(table);
+
+      GridPane.setConstraints(boxtable, 1, 1);
+      gridPane4.getChildren().addAll(boxtable);
+      // gridPane4
+      //   .getChildren()
+      //   .addAll(
+      //     tablenm,
+      //     tablenmfield,
+      //     tablemateria,
+      //     tablecurso,
+      //     tablecursofield,
+      //     tablesem,
+      //     tablesemfield,
+      //     tablefalta,
+      //     tablefaltafield,
+      //     tablenota,
+      //     tablenotafield
+      //   );
+
+      tab4.setContent(gridPane4);
 
       tabPane.getTabs().addAll(tab1, tab2, tab3, tab4);
 
@@ -786,3 +842,4 @@ public class App extends Application {
     }
   }
 }
+

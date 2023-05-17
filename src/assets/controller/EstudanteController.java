@@ -265,9 +265,9 @@ public class EstudanteController {
     Connectionfactory link = new Connectionfactory();
     String sql =
       " SELECT  " +
-      " aluno.RGM, " +
       " aluno.NOME AS NOMEALUNO, " +
       " curso.NOME AS NOMECURSO," +
+      " disciplina.NOME AS NOMECURSO," +
       " avaliacao.SEM," +
       " avaliacao.FALTA," +
       " avaliacao.NOTA" +
