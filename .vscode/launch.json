@@ -9,6 +9,13 @@
             "name": "App",
             "request": "launch",
             "mainClass": "assets.view.App",
+            "projectName": "2sem_java_estudante_aab38069"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "assets.view.App",
             "projectName": "2sem_java_estudante_eec251c3"
         },
         {

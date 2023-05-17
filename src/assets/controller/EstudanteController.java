@@ -115,7 +115,7 @@ public class EstudanteController {
 
     return null;
   }
-
+   
   public Estudante CreateEstudante(
     String rgm,
     String nome,
@@ -127,6 +127,31 @@ public class EstudanteController {
     String uf,
     String celular
   ) {
+    if (rgm.equals("")){
+       JOptionPane.showMessageDialog(null, "Preencha o rgm");
+        return null;
+      } else if(nome.equals("")){
+        JOptionPane.showMessageDialog(null, "Preencha o nome");
+        return null;
+      }else if(cpf.equals("")){
+        JOptionPane.showMessageDialog(null, "Preencha o cpf");
+        return null;
+      }else if(email.equals("")){
+        JOptionPane.showMessageDialog(null, "Preencha o email");
+        return null;
+      }else if(end.equals("")){
+        JOptionPane.showMessageDialog(null, "Preencha o endereço");
+        return null;
+      }else if(mun.equals("")){
+        JOptionPane.showMessageDialog(null, "Preencha o municipio");
+        return null;
+      }else if(celular.equals("")){
+        JOptionPane.showMessageDialog(null, "Preencha o celular");
+        return null;
+      }else if(nasc.equals("")){
+        JOptionPane.showMessageDialog(null, "Preencha a data de nascimento");
+        return null;
+      }
     Connectionfactory link = new Connectionfactory();
     String sql =
       "INSERT INTO aluno(aluno.RGM,aluno.NOME, aluno.NASC,aluno.CPF,aluno.EMAIL,aluno.END,aluno.MUN,aluno.UF,aluno.CELULAR,aluno.CRIACAO_DATA) VALUES (?,?,?,?,?,?,?,?,?,NOW())";
@@ -141,19 +166,19 @@ public class EstudanteController {
       pstmt.setString(7, mun == null ? "NULL" : mun);
       pstmt.setString(8, uf == null ? "NULL" : uf);
       pstmt.setString(9, celular == null ? "NULL" : celular);
-
+      
       int rs = pstmt.executeUpdate();
 
       if (rs > 0) {
         System.out.println("Estudante inserido");
+        JOptionPane.showMessageDialog(null, "Estudante inserido");
       } else {
-        System.out.println("Não foi possível inserir o estudante.");
+       // System.out.println("Não foi possível inserir o estudante.");
         // JOptionPane.showMessageDialog(null, rs);
       }
     } catch (SQLException e) {
       System.out.println(e.getMessage());
-      JOptionPane.showMessageDialog(null, e.getMessage());
-      // JOptionPane.showMessageDialog(null, );
+      JOptionPane.showMessageDialog(null, "Estudante já cadastrado");
       // e.printStackTrace();
     }
 
