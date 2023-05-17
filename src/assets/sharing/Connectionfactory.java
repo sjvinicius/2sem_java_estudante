@@ -22,8 +22,8 @@ public class Connectionfactory {
   public Connectionfactory() {
     try {
       String url =
-        "jdbc:mysql://localhost:3306/estudante_2sem_cc?user=root&password=";  //Giovanni Connection
-        //"jdbc:mysql://localhost:3306/estudante_2sem_cc?user=root&password=12345"; // Vinicius Conection
+        // "jdbc:mysql://localhost:3306/estudante_2sem_cc?user=root&password=";  //Giovanni Connection
+        "jdbc:mysql://localhost:3306/estudante_2sem_cc?user=root&password=12345"; // Vinicius Conection
         this.setConn(DriverManager.getConnection(url));
 
       System.out.println("Banco de Dados: OK");

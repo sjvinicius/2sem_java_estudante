@@ -11,8 +11,6 @@ import javax.swing.JOptionPane;
 
 public class EstudanteController {
 
-  public void CreateNewEstudante(Estudante est) {}
-
   public Estudante ListOneEstudante(String srgm) {
     try {
       String rgm = null;
@@ -165,6 +163,7 @@ public class EstudanteController {
     String uf,
     String celular
   ) {
+
     if (rgm.equals("")) {
       JOptionPane.showMessageDialog(null, "Preencha o rgm");
       return null;
@@ -190,9 +189,11 @@ public class EstudanteController {
       JOptionPane.showMessageDialog(null, "Preencha a data de nascimento");
       return null;
     }
+
+    Estudante est = null;
     Connectionfactory link = new Connectionfactory();
     String sql =
-      "SELECT aluno.RGM, aluno.NOME, aluno.NASC, aluno.CPF, aluno.EMAIL, aluno.END, aluno.MUN, aluno.UF, aluno.CELULAR FROM aluno WHERE aluno.RGM = ?";
+      "SELECT aluno.RGM, aluno.NOME, aluno.NASC, aluno.CPF, aluno.EMAIL, aluno.END, aluno.MUN, aluno.UF, aluno.CELULAR FROM aluno WHERE aluno.RGM = ? AND aluno.STATUS = 'I'";
 
     try (PreparedStatement stmt = link.getConn().prepareStatement(sql)) {
       stmt.setString(1, rgm);
@@ -215,6 +216,7 @@ public class EstudanteController {
     } catch (SQLException e) {
       System.out.println(e);
     }
+    System.out.println(est);
 
     if (est == null) {
       String sqlinsert =
