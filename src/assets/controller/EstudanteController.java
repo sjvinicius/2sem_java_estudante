@@ -6,6 +6,8 @@ import com.mysql.cj.protocol.Resultset;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 public class EstudanteController {
@@ -234,5 +236,84 @@ public class EstudanteController {
 
       return null;
     }
+  }
+
+  public void BuscarBoletim(String rgm){
+
+    Connectionfactory link = new Connectionfactory();
+    String sql =
+              " SELECT  "+
+              " aluno.RGM, "+
+              " aluno.NOME AS NOMEALUNO, "+
+              " curso.NOME AS NOMECURSO,"+
+              " avaliacao.SEM,"+
+              " avaliacao.FALTA,"+
+              " avaliacao.NOTA"+
+            " FROM "+
+              " aluno"+
+            " INNER JOIN"+
+              " alunocursocampus "+
+              " ON"+
+              " aluno.ALUNO_ID = alunocursocampus.ALUNO_ID  "+
+              " AND  "+
+              " alunocursocampus.STATUS = 'A'"+
+            " INNER JOIN"+
+              " cursocampus"+
+              " ON"+
+              " cursocampus.CURSOCAMPUS_ID = alunocursocampus.CURSOCAMPUS_ID"+
+              " AND"+
+              " cursocampus.STATUS = 'A'"+
+            " INNER JOIN"+
+              " curso"+
+              " ON"+
+              " curso.CURSO_ID = cursocampus.CURSO_ID"+
+              " AND"+
+              " curso.STATUS = 'A'"+
+            " INNER JOIN"+
+              " campus"+
+              " ON"+
+              " campus.CAMPUS_ID = cursocampus.CAMPUS_ID"+
+              " AND"+
+              " campus.STATUS = 'A'"+
+            " INNER JOIN"+
+              " disciplinacurso"+
+              " ON"+
+              " disciplinacurso.CURSO_ID = curso.CURSO_ID"+
+              " AND"+
+              " disciplinacurso.STATUS = 'A'"+
+            " INNER JOIN"+
+              " disciplina"+
+              " ON"+
+              " disciplina.DISCIPLINA_ID = disciplinacurso.DISCIPLINA_ID"+
+              " AND"+
+              " disciplina.STATUS = 'A'"+
+            " INNER JOIN"+
+              " avaliacao"+
+              " ON"+
+              " avaliacao.ALUNO_ID = aluno.ALUNO_ID"+
+              " AND"+
+              " avaliacao.DISCPLINA_ID = disciplina.DISCIPLINA_ID"+
+              " AND"+
+              " avaliacao.STATUS = 'A'"+
+            " WHERE "+
+            " aluno.RGM = '1234'"+
+            " AND"+
+            " aluno.STATUS = 'A'";
+
+    try (PreparedStatement stmt = link.getConn().prepareStatement(sql)) {
+      stmt.setString(1, rgm);
+      ResultSet rs = stmt.executeQuery();
+
+      ArrayList<Estudante> estudantes = new ArrayList<Estudante>();
+      while(rs.next()){
+
+        System.out.println(rs.getString(""));
+
+      }
+
+    } catch (Exception e) {
+      // TODO: handle exception
+    }
+
   }
 }

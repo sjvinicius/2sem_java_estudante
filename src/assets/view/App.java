@@ -3,15 +3,18 @@ package assets.view;
 import assets.controller.EstudanteController;
 import assets.model.Estudante;
 import assets.sharing.Connectionfactory;
+import assets.sharing.Masks;
 import java.sql.Connection;
 import java.util.zip.CheckedOutputStream;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ContentDisplay;
@@ -39,6 +42,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javax.swing.text.MaskFormatter;
 
 public class App extends Application {
 
@@ -48,7 +52,7 @@ public class App extends Application {
 
   Connectionfactory conexao;
 
-    public static void main(String[] args) throws Exception {
+  public static void main(String[] args) throws Exception {
     // Connectionfactory con = new Connectionfactory();
     // con.SendQuery("SELECT * FROM aluno");
     launch(args);
@@ -136,6 +140,8 @@ public class App extends Application {
 
       TextField dtnascField = new TextField("06/10/2001");
       GridPane.setConstraints(dtnascField, 1, 1);
+      Masks dateformater = new Masks(dtnascField);
+      dateformater.setMask(Masks.DATA_BARRA);
       //   Data de Nascimento
 
       //   CPF
@@ -144,6 +150,10 @@ public class App extends Application {
 
       TextField cpfField = new TextField("229.355.918-10");
       GridPane.setConstraints(cpfField, 3, 1);
+      Masks cpFormatter = new Masks(cpfField);
+      cpFormatter.setMask(Masks.CPF);
+
+      // cpfField.setTextFormatter();
       //   CPF
 
       //   Email
@@ -195,6 +205,8 @@ public class App extends Application {
 
       TextField phoneField = new TextField("(11) 9-5980-5820");
       GridPane.setConstraints(phoneField, 5, 4);
+      Masks telformat = new Masks(phoneField);
+      telformat.setMask(Masks.TEL_9DIG);
       //   Celular
 
       gridPane
@@ -239,8 +251,12 @@ public class App extends Application {
       // choicecurse.setPrefWidth(600);
       choicecurse
         .getItems()
-        .addAll("Desenvolvimento", "Análise de dessenvolvimento", "Ciência");
-      choicecurse.setValue("Ciência");
+        .addAll(
+          "Desenvolvimento",
+          "Análise de Desenvolvimento",
+          "Ciência da Computação"
+        );
+      choicecurse.setValue("Ciência da Computação");
       choicecurse.setPrefWidth(300);
 
       HBox curseField = new HBox(choicecurse);
@@ -370,20 +386,14 @@ public class App extends Application {
           campusLabel,
           campusField,
           periodLabel,
-          // radioMat,
-          // radioVes,
-          // radioNot,
           boxradiobt,
-          // btn1,
-          // btn2,
-          // btn3,
-          // btn4,
           boxbtn
         );
       tab2.setContent(gridPane2);
 
       Tab tab3 = new Tab("Notas e Faltas");
       tab3.setClosable(false);
+      tab3.setOnSelectionChanged(e -> {});
 
       GridPane gridPane3 = new GridPane();
       gridPane3.setPadding(new Insets(16, 16, 16, 16));
@@ -551,6 +561,11 @@ public class App extends Application {
 
       Tab tab4 = new Tab("Boletim");
       tab4.setClosable(false);
+      tab4.setOnSelectionChanged(e -> {
+
+        
+
+      });
 
       tabPane.getTabs().addAll(tab1, tab2, tab3, tab4);
 
@@ -602,7 +617,6 @@ public class App extends Application {
 
       MenuItem menuItem2 = new MenuItem("Alterar");
       menuItem2.setOnAction(e -> {
-
         EstudanteController estctrl = new EstudanteController();
 
         Estudante est = estctrl.UpdateEstudante(
@@ -613,12 +627,11 @@ public class App extends Application {
           emailField.getText().toString(),
           endField.getText().toString(),
           munField.getText().toString(),
-          choiceuf.getValue().toString() ,
+          choiceuf.getValue().toString(),
           phoneField.getText().toString()
         );
 
-        if(est != null){
-
+        if (est != null) {
           nameField.setText(est.getNome());
           dtnascField.setText(est.getNasc());
           cpfField.setText(est.getCpf());
@@ -627,7 +640,6 @@ public class App extends Application {
           munField.setText(est.getMun());
           choiceuf.setValue(est.getUf());
           phoneField.setText(est.getCelular());
-
         }
       });
 
