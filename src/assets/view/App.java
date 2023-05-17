@@ -48,7 +48,7 @@ public class App extends Application {
 
   Connectionfactory conexao;
 
-  public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws Exception {
     // Connectionfactory con = new Connectionfactory();
     // con.SendQuery("SELECT * FROM aluno");
     launch(args);
@@ -556,7 +556,7 @@ public class App extends Application {
 
       borderPane.setCenter(tabPane);
       borderPane.setLayoutY(25);
-      
+
       Group group = new Group();
       // group.getChildren().addAll(menuBar,borderPane);
       // Scene root = new Scene(borderPane, 750, 250);
@@ -565,7 +565,6 @@ public class App extends Application {
       Menu menu1 = new Menu("Aluno");
       MenuItem menuItem1 = new MenuItem("Salvar");
       menuItem1.setOnAction(e -> {
-
         // EstudanteController estCtlr = new EstudanteController();
         // Estudante est = new Estudante(
         //   rgmField.getText().toString(),
@@ -591,21 +590,56 @@ public class App extends Application {
           emailField.getText().toString(),
           endField.getText().toString(),
           munField.getText().toString(),
-          ufLabel.getText().toString(),
+          choiceuf.getValue().toString(),
           phoneField.getText().toString()
         );
       });
+      KeyCombination shortsave = new KeyCodeCombination(
+        KeyCode.S,
+        KeyCombination.CONTROL_DOWN
+      );
+      menuItem1.setAccelerator(shortsave);
 
       MenuItem menuItem2 = new MenuItem("Alterar");
-      MenuItem menuItem3 = new MenuItem("Consultar");
-      menuItem3.setOnAction(e -> {
+      menuItem2.setOnAction(e -> {
 
         EstudanteController estctrl = new EstudanteController();
 
-        Estudante estbuscado = estctrl.ListOneEstudante(rgmField.getText().toString());
+        Estudante est = estctrl.UpdateEstudante(
+          rgmField.getText().toString(),
+          nameField.getText().toString(),
+          dtnascField.getText().toString(),
+          cpfField.getText().toString(),
+          emailField.getText().toString(),
+          endField.getText().toString(),
+          munField.getText().toString(),
+          choiceuf.getValue().toString() ,
+          phoneField.getText().toString()
+        );
 
-        if(estbuscado != null){
+        if(est != null){
 
+          nameField.setText(est.getNome());
+          dtnascField.setText(est.getNasc());
+          cpfField.setText(est.getCpf());
+          emailField.setText(est.getEmail());
+          endField.setText(est.getEnd());
+          munField.setText(est.getMun());
+          choiceuf.setValue(est.getUf());
+          phoneField.setText(est.getCelular());
+
+        }
+      });
+
+      MenuItem menuItem3 = new MenuItem("Consultar");
+      menuItem3.setOnAction(e -> {
+        EstudanteController estctrl = new EstudanteController();
+
+        Estudante estbuscado = estctrl.ListOneEstudante(
+          rgmField.getText().toString()
+        );
+
+        if (estbuscado != null) {
           nameField.setText(estbuscado.getNome());
           dtnascField.setText(estbuscado.getNasc());
           cpfField.setText(estbuscado.getCpf());
@@ -614,17 +648,31 @@ public class App extends Application {
           munField.setText(estbuscado.getMun());
           choiceuf.setValue(estbuscado.getUf());
           phoneField.setText(estbuscado.getCelular());
-          
         }
-        
       });
 
       MenuItem menuItem4 = new MenuItem("Excluir");
-      KeyCombination shortsave = new KeyCodeCombination(
-        KeyCode.S,
-        KeyCombination.CONTROL_DOWN
-      );
-      menuItem1.setAccelerator(shortsave);
+
+      menuItem4.setOnAction(e -> {
+        EstudanteController estctrl = new EstudanteController();
+
+        int returnestctrl = estctrl.DeleteOneEstudante(
+          rgmField.getText().toString()
+        );
+
+        if (returnestctrl > 0) {
+          rgmField.setText("");
+          nameField.setText("");
+          dtnascField.setText("");
+          cpfField.setText("");
+          emailField.setText("");
+          endField.setText("");
+          munField.setText("");
+          choiceuf.setValue("");
+          phoneField.setText("");
+        }
+      });
+
       //? ----------------------------------------------
       MenuItem menuItem5 = new MenuItem("Sair");
       menuItem5.setOnAction(e -> {
