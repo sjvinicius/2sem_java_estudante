@@ -46,7 +46,7 @@ public class App extends Application {
 
   TabPane tabPane;
 
-  // Connectionfactory conexao;
+  Connectionfactory conexao;
 
   public static void main(String[] args) throws Exception {
     // Connectionfactory con = new Connectionfactory();
@@ -219,6 +219,7 @@ public class App extends Application {
           phoneLabel,
           phoneField
         );
+
       tab1.setContent(gridPane);
 
       Tab tab2 = new Tab("Curso");
@@ -564,8 +565,6 @@ public class App extends Application {
       Menu menu1 = new Menu("Aluno");
       MenuItem menuItem1 = new MenuItem("Salvar");
       menuItem1.setOnAction(e -> {
-        System.out.println("Salvar");
-        System.out.println(rgmField.getText());
 
         // EstudanteController estCtlr = new EstudanteController();
         // Estudante est = new Estudante(
@@ -596,8 +595,30 @@ public class App extends Application {
           phoneField.getText().toString()
         );
       });
+
       MenuItem menuItem2 = new MenuItem("Alterar");
       MenuItem menuItem3 = new MenuItem("Consultar");
+      menuItem3.setOnAction(e -> {
+
+        EstudanteController estctrl = new EstudanteController();
+
+        Estudante estbuscado = estctrl.ListOneEstudante(rgmField.getText().toString());
+
+        if(estbuscado != null){
+
+          nameField.setText(estbuscado.getNome());
+          dtnascField.setText(estbuscado.getNasc());
+          cpfField.setText(estbuscado.getCpf());
+          emailField.setText(estbuscado.getEmail());
+          endField.setText(estbuscado.getEnd());
+          munField.setText(estbuscado.getMun());
+          choiceuf.setValue(estbuscado.getUf());
+          phoneField.setText(estbuscado.getCelular());
+          
+        }
+        
+      });
+
       MenuItem menuItem4 = new MenuItem("Excluir");
       KeyCombination shortsave = new KeyCodeCombination(
         KeyCode.S,
@@ -650,53 +671,54 @@ public class App extends Application {
 
       group.getChildren().add(menuBar);
       group.getChildren().add(borderPane);
-      
-      root.setOnKeyPressed(
-        new EventHandler<KeyEvent>() {
-          @Override
-          public void handle(KeyEvent evt) {
-            if (evt.getCode() == KeyCode.S && evt.isControlDown()) {
-              System.out.println("Salvar");
-              System.out.println(rgmField.getText());
 
-              // EstudanteController estCtlr = new EstudanteController();
-              // Estudante est = new Estudante(
-              //   rgmField.getText().toString(),
-              //   nameField.getText().toString(),
-              //   dtnascField.getText().toString(),
-              //   cpfField.getText().toString(),
-              //   emailField.getText().toString(),
-              //   endField.getText().toString(),
-              //   munField.getText().toString(),
-              //   ufLabel.getText().toString(),
-              //   phoneField.getText().toString()
-              // );
+      // root.setOnKeyPressed(
+      //   new EventHandler<KeyEvent>() {
+      //     @Override
+      //     public void handle(KeyEvent evt) {
+      //       if (evt.getCode() == KeyCode.S && evt.isControlDown()) {
+      //         // System.out.println("Salvar");
+      //         // System.out.println(rgmField.getText());
 
-              EstudanteController estctrl = new EstudanteController();
+      //         // EstudanteController estCtlr = new EstudanteController();
+      //         // Estudante est = new Estudante(
+      //         //   rgmField.getText().toString(),
+      //         //   nameField.getText().toString(),
+      //         //   dtnascField.getText().toString(),
+      //         //   cpfField.getText().toString(),
+      //         //   emailField.getText().toString(),
+      //         //   endField.getText().toString(),
+      //         //   munField.getText().toString(),
+      //         //   ufLabel.getText().toString(),
+      //         //   phoneField.getText().toString()
+      //         // );
 
-              // estctrl.CreateEstudante(est);
+      //         // EstudanteController estctrl = new EstudanteController();
 
-              estctrl.CreateEstudante(
-                rgmField.getText().toString(),
-                nameField.getText().toString(),
-                dtnascField.getText().toString(),
-                cpfField.getText().toString(),
-                emailField.getText().toString(),
-                endField.getText().toString(),
-                munField.getText().toString(),
-                ufLabel.getText().toString(),
-                phoneField.getText().toString()
-              );
-            } else if (evt.getCode() == KeyCode.A && evt.isControlDown()) {
-              System.out.println("Alterar");
-            } else if (evt.getCode() == KeyCode.R && evt.isShiftDown()) {
-              System.exit(0);
-            } else if (evt.getCode() == KeyCode.F9) {
-              System.out.println("Ajuda");
-            }
-          }
-        }
-      );
+      //         // // estctrl.CreateEstudante(est);
+
+      //         // estctrl.CreateEstudante(
+      //         //   rgmField.getText().toString(),
+      //         //   nameField.getText().toString(),
+      //         //   dtnascField.getText().toString(),
+      //         //   cpfField.getText().toString(),
+      //         //   emailField.getText().toString(),
+      //         //   endField.getText().toString(),
+      //         //   munField.getText().toString(),
+      //         //   ufLabel.getText().toString(),
+      //         //   phoneField.getText().toString()
+      //         // );
+      //       } else if (evt.getCode() == KeyCode.A && evt.isControlDown()) {
+      //         System.out.println("Alterar");
+      //       } else if (evt.getCode() == KeyCode.R && evt.isShiftDown()) {
+      //         System.exit(0);
+      //       } else if (evt.getCode() == KeyCode.F9) {
+      //         System.out.println("Ajuda");
+      //       }
+      //     }
+      //   }
+      // );
+
       window.setScene(root);
       window.show();
     } catch (Error e) {

@@ -5,6 +5,7 @@ import assets.sharing.Connectionfactory;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 public class EstudanteController {
 
@@ -26,9 +27,9 @@ public class EstudanteController {
 
       String sql =
         "SELECT aluno.RMG, aluno.NOME, aluno.NASC, aluno.CPF, aluno.EMAIL, aluno.END, aluno.MUN, aluno.UF, aluno.CELULAR FROM aluno WHERE aluno.RGM = ? AND STATUS = 'A' LIMIT 1";
-
       try (PreparedStatement pstmt = link.getConn().prepareStatement(sql);) {
         pstmt.setString(1, srgm);
+        System.out.println(sql);
         ResultSet rs = pstmt.executeQuery(sql);
 
         if (rs.next()) {
@@ -42,6 +43,8 @@ public class EstudanteController {
           uf = rs.getString("UF");
           celular = rs.getString("CELULAR");
         }
+
+        JOptionPane.showMessageDialog(null, "Sucesso");
 
         return new Estudante(
           rgm,
@@ -130,7 +133,7 @@ public class EstudanteController {
 
     try (PreparedStatement pstmt = link.getConn().prepareStatement(sql);) {
       pstmt.setString(1, rgm == null ? "NULL" : rgm);
-      pstmt.setString(2, nasc == null ? "NULL" : nasc);
+      pstmt.setString(2, nome == null ? "NULL" : nome);
       pstmt.setString(3, nasc == null ? "NULL" : nasc);
       pstmt.setString(4, cpf == null ? "NULL" : cpf);
       pstmt.setString(5, email == null ? "NULL" : email);
@@ -141,18 +144,17 @@ public class EstudanteController {
 
       int rs = pstmt.executeUpdate();
 
-      if(rs > 0){
-
+      if (rs > 0) {
         System.out.println("Estudante inserido");
-        
-      }else{
-        
+      } else {
         System.out.println("Não foi possível inserir o estudante.");
-
+        // JOptionPane.showMessageDialog(null, rs);
       }
-      
     } catch (SQLException e) {
       System.out.println(e.getMessage());
+      JOptionPane.showMessageDialog(null, e.getMessage());
+      // JOptionPane.showMessageDialog(null, );
+      // e.printStackTrace();
     }
 
     return null;
