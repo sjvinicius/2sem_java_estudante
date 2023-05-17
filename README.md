@@ -1,18 +1,18 @@
-## Getting Started
+## Projeto SistemaAluno JAVA
+Professor, Jadir Custodio Mendonça;
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Projeto desenvolvido por:
+Giovanni Ribeiro Iannace;
+Luiz Gustavo Borges;
+Vinicius Silva.
 
-## Folder Structure
 
-The workspace contains two folders by default, where:
+Neste projeto tinhamos como objetivo criar uma aplicação utilizando java e mysql, onde fosse possível realizar o CRUD (criar, alterar, consultar e exluir um aluno) consular o curso e local onde esse aluno realiza sua graduação o sistema também tinha como função trazer notas, faltas  e o boletim escolar do aluno.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Ferramentas Utilizadas:
+-Xamp
+-Heidi
+-Vscode
+-Java, suas bibliotecas e propriedades.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
