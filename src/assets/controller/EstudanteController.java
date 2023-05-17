@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 
 public class EstudanteController {
@@ -144,7 +143,6 @@ public class EstudanteController {
           uf,
           celular
         );
-        
       } else {
         JOptionPane.showMessageDialog(null, "Não foram realizadas alterações.");
         return null;
@@ -167,8 +165,31 @@ public class EstudanteController {
     String uf,
     String celular
   ) {
-    Estudante est = null;
-
+    if (rgm.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha o rgm");
+      return null;
+    } else if (nome.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha o nome");
+      return null;
+    } else if (cpf.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha o cpf");
+      return null;
+    } else if (email.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha o email");
+      return null;
+    } else if (end.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha o endereço");
+      return null;
+    } else if (mun.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha o municipio");
+      return null;
+    } else if (celular.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha o celular");
+      return null;
+    } else if (nasc.equals("")) {
+      JOptionPane.showMessageDialog(null, "Preencha a data de nascimento");
+      return null;
+    }
     Connectionfactory link = new Connectionfactory();
     String sql =
       "SELECT aluno.RGM, aluno.NOME, aluno.NASC, aluno.CPF, aluno.EMAIL, aluno.END, aluno.MUN, aluno.UF, aluno.CELULAR FROM aluno WHERE aluno.RGM = ?";
@@ -216,14 +237,14 @@ public class EstudanteController {
 
         if (rs > 0) {
           System.out.println("Estudante inserido");
+          JOptionPane.showMessageDialog(null, "Estudante inserido");
         } else {
-          System.out.println("Não foi possível inserir o estudante.");
-          // JOptionPane.showMessageDialog(null, rs);
+          // System.out.println("Não foi possível inserir o estudante.");
+          JOptionPane.showMessageDialog(null, "Não foi possível inserir o estudante.");
         }
-        link.getConn().close();
       } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, e.getMessage());
-        // JOptionPane.showMessageDialog(null, );
+        System.out.println(e.getMessage());
+        JOptionPane.showMessageDialog(null, "Estudante já cadastrado");
         // e.printStackTrace();
       }
 
@@ -238,82 +259,77 @@ public class EstudanteController {
     }
   }
 
-  public void BuscarBoletim(String rgm){
-
+  public void BuscarBoletim(String rgm) {
     Connectionfactory link = new Connectionfactory();
     String sql =
-              " SELECT  "+
-              " aluno.RGM, "+
-              " aluno.NOME AS NOMEALUNO, "+
-              " curso.NOME AS NOMECURSO,"+
-              " avaliacao.SEM,"+
-              " avaliacao.FALTA,"+
-              " avaliacao.NOTA"+
-            " FROM "+
-              " aluno"+
-            " INNER JOIN"+
-              " alunocursocampus "+
-              " ON"+
-              " aluno.ALUNO_ID = alunocursocampus.ALUNO_ID  "+
-              " AND  "+
-              " alunocursocampus.STATUS = 'A'"+
-            " INNER JOIN"+
-              " cursocampus"+
-              " ON"+
-              " cursocampus.CURSOCAMPUS_ID = alunocursocampus.CURSOCAMPUS_ID"+
-              " AND"+
-              " cursocampus.STATUS = 'A'"+
-            " INNER JOIN"+
-              " curso"+
-              " ON"+
-              " curso.CURSO_ID = cursocampus.CURSO_ID"+
-              " AND"+
-              " curso.STATUS = 'A'"+
-            " INNER JOIN"+
-              " campus"+
-              " ON"+
-              " campus.CAMPUS_ID = cursocampus.CAMPUS_ID"+
-              " AND"+
-              " campus.STATUS = 'A'"+
-            " INNER JOIN"+
-              " disciplinacurso"+
-              " ON"+
-              " disciplinacurso.CURSO_ID = curso.CURSO_ID"+
-              " AND"+
-              " disciplinacurso.STATUS = 'A'"+
-            " INNER JOIN"+
-              " disciplina"+
-              " ON"+
-              " disciplina.DISCIPLINA_ID = disciplinacurso.DISCIPLINA_ID"+
-              " AND"+
-              " disciplina.STATUS = 'A'"+
-            " INNER JOIN"+
-              " avaliacao"+
-              " ON"+
-              " avaliacao.ALUNO_ID = aluno.ALUNO_ID"+
-              " AND"+
-              " avaliacao.DISCPLINA_ID = disciplina.DISCIPLINA_ID"+
-              " AND"+
-              " avaliacao.STATUS = 'A'"+
-            " WHERE "+
-            " aluno.RGM = '1234'"+
-            " AND"+
-            " aluno.STATUS = 'A'";
+      " SELECT  " +
+      " aluno.RGM, " +
+      " aluno.NOME AS NOMEALUNO, " +
+      " curso.NOME AS NOMECURSO," +
+      " avaliacao.SEM," +
+      " avaliacao.FALTA," +
+      " avaliacao.NOTA" +
+      " FROM " +
+      " aluno" +
+      " INNER JOIN" +
+      " alunocursocampus " +
+      " ON" +
+      " aluno.ALUNO_ID = alunocursocampus.ALUNO_ID  " +
+      " AND  " +
+      " alunocursocampus.STATUS = 'A'" +
+      " INNER JOIN" +
+      " cursocampus" +
+      " ON" +
+      " cursocampus.CURSOCAMPUS_ID = alunocursocampus.CURSOCAMPUS_ID" +
+      " AND" +
+      " cursocampus.STATUS = 'A'" +
+      " INNER JOIN" +
+      " curso" +
+      " ON" +
+      " curso.CURSO_ID = cursocampus.CURSO_ID" +
+      " AND" +
+      " curso.STATUS = 'A'" +
+      " INNER JOIN" +
+      " campus" +
+      " ON" +
+      " campus.CAMPUS_ID = cursocampus.CAMPUS_ID" +
+      " AND" +
+      " campus.STATUS = 'A'" +
+      " INNER JOIN" +
+      " disciplinacurso" +
+      " ON" +
+      " disciplinacurso.CURSO_ID = curso.CURSO_ID" +
+      " AND" +
+      " disciplinacurso.STATUS = 'A'" +
+      " INNER JOIN" +
+      " disciplina" +
+      " ON" +
+      " disciplina.DISCIPLINA_ID = disciplinacurso.DISCIPLINA_ID" +
+      " AND" +
+      " disciplina.STATUS = 'A'" +
+      " INNER JOIN" +
+      " avaliacao" +
+      " ON" +
+      " avaliacao.ALUNO_ID = aluno.ALUNO_ID" +
+      " AND" +
+      " avaliacao.DISCPLINA_ID = disciplina.DISCIPLINA_ID" +
+      " AND" +
+      " avaliacao.STATUS = 'A'" +
+      " WHERE " +
+      " aluno.RGM = '1234'" +
+      " AND" +
+      " aluno.STATUS = 'A'";
 
     try (PreparedStatement stmt = link.getConn().prepareStatement(sql)) {
       stmt.setString(1, rgm);
       ResultSet rs = stmt.executeQuery();
 
       ArrayList<Estudante> estudantes = new ArrayList<Estudante>();
-      while(rs.next()){
-
+      while (rs.next()) {
         System.out.println(rs.getString(""));
-
       }
-
     } catch (Exception e) {
       // TODO: handle exception
     }
-
   }
 }
